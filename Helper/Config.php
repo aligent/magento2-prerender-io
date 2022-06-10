@@ -1,4 +1,7 @@
 <?php
+/*
+ * Copyright (c) Aligent Consulting. All rights reserved.
+ */
 
 declare(strict_types=1);
 namespace Aligent\PrerenderIo\Helper;
