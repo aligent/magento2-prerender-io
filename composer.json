@@ -1,0 +1,20 @@
+{
+    "name": "aligent/magento2-prerender-io",
+    "description": "Prerender.io integration for Magento 2, providing recaching for product URLs",
+    "require": {
+        "php": ">=7.4",
+        "magento/framework": "*"
+    },
+    "type": "magento2-module",
+    "license": [
+        "GPL-3.0-only"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Aligent\\PrerenderIo\\": ""
+        }
+    }
+}
