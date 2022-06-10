@@ -12,5 +12,13 @@ To install via composer, simply run:
 composer require aligent/magento2-prerender-io
 ```
 
+Then, ensure the module is installed and the index is set to `Schedule`:
+
+```bash
+bin/magento module:enable Aligent_PrerenderIo
+bin/magento setup:upgrade
+bin/magento indexer:set-mode schedule prerender_io_product
+```
+
 ## Configuration
 The extension can be configured via `Stores -> Configuration -> System -> Prerender.io`
