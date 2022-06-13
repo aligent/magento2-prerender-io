@@ -34,9 +34,10 @@ class PrerenderClient implements PrerenderClientInterface
         LoggerInterface $logger
     ) {
         $this->prerenderConfigHelper = $prerenderConfigHelper;
-        $this->client = $client;
         $this->jsonSerializer = $jsonSerializer;
         $this->logger = $logger;
+        $this->client = $client;
+        $this->client->addHeader('content-type', 'application/json');
     }
 
     public function recacheUrls(array $urls, int $storeId): void
@@ -50,13 +51,9 @@ class PrerenderClient implements PrerenderClientInterface
             return;
         }
 
-        if (count($urls) > self::MAX_URLS) {
-            $batches = array_chunk($urls, self::MAX_URLS);
-            foreach ($batches as $batch) {
-                $this->sendRequest($batch, $token);
-            }
-        } else {
-            $this->sendRequest($urls, $token);
+        $batches = array_chunk($urls, self::MAX_URLS);
+        foreach ($batches as $batch) {
+            $this->sendRequest($batch, $token);
         }
     }
 
@@ -68,7 +65,6 @@ class PrerenderClient implements PrerenderClientInterface
                 'urls' => $urls
             ]
         );
-        $this->client->addHeader('content-type', 'application/json');
         try {
             $this->client->post(self::PRERENDER_RECACHE_URL, $payload);
         } catch (\Exception $e) {
