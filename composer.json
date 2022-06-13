@@ -5,6 +5,9 @@
         "php": ">=7.4",
         "magento/framework": "*"
     },
+    "require-dev": {
+        "magento/magento-coding-standard": ">=23"
+    },
     "type": "magento2-module",
     "license": [
         "GPL-3.0-only"
