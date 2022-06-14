@@ -17,12 +17,18 @@ class Config
     /** @var ScopeConfigInterface  */
     private ScopeConfigInterface $scopeConfig;
 
+    /**
+     *
+     * @param ScopeConfigInterface $scopeConfig
+     */
     public function __construct(ScopeConfigInterface $scopeConfig)
     {
         $this->scopeConfig = $scopeConfig;
     }
 
     /**
+     * Return if recaching functionality is enabled or not
+     *
      * @param int|null $storeId
      * @return bool
      */
@@ -36,6 +42,8 @@ class Config
     }
 
     /**
+     * Return configured Prerender.io token for API calls
+     *
      * @param int|null $storeId
      * @return string|null
      */

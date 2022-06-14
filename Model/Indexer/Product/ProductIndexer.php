@@ -38,6 +38,15 @@ class ProductIndexer implements IndexerActionInterface, MviewActionInterface, Di
     /** @var int|null  */
     private ?int $batchSize;
 
+    /**
+     *
+     * @param DimensionProviderInterface $dimensionProvider
+     * @param GetUrlsForProducts $getUrlsForProducts
+     * @param PrerenderClientInterface $prerenderClient
+     * @param DeploymentConfig $deploymentConfig
+     * @param Config $prerenderConfigHelper
+     * @param int|null $batchSize
+     */
     public function __construct(
         DimensionProviderInterface $dimensionProvider,
         GetUrlsForProducts $getUrlsForProducts,
@@ -110,6 +119,10 @@ class ProductIndexer implements IndexerActionInterface, MviewActionInterface, Di
     }
 
     /**
+     * Execute indexing per dimension (store)
+     *
+     * @param arry $dimensions
+     * @param \Traversable $entityIds
      * @throws FileSystemException
      * @throws RuntimeException
      */

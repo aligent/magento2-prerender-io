@@ -22,6 +22,12 @@ class GetUrlsForProducts
     /** @var Emulation */
     private Emulation $emulation;
 
+    /**
+     *
+     * @param CollectionFactory $productCollectionFactory
+     * @param StoreManagerInterface $storeManager
+     * @param Emulation $emulation
+     */
     public function __construct(
         CollectionFactory $productCollectionFactory,
         StoreManagerInterface $storeManager,
@@ -32,6 +38,13 @@ class GetUrlsForProducts
         $this->emulation = $emulation;
     }
 
+    /**
+     * Generate product URLs based on URL_REWRITE entries
+     *
+     * @param array $productIds
+     * @param int $storeId
+     * @return array
+     */
     public function execute(array $productIds, int $storeId): array
     {
         $productCollection = $this->productCollectionFactory->create();

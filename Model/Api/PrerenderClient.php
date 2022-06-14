@@ -27,6 +27,13 @@ class PrerenderClient implements PrerenderClientInterface
     /** @var LoggerInterface  */
     private LoggerInterface $logger;
 
+    /**
+     *
+     * @param Config $prerenderConfigHelper
+     * @param ClientInterface $client
+     * @param SerializerInterface $jsonSerializer
+     * @param LoggerInterface $logger
+     */
     public function __construct(
         Config $prerenderConfigHelper,
         ClientInterface $client,
@@ -34,11 +41,19 @@ class PrerenderClient implements PrerenderClientInterface
         LoggerInterface $logger
     ) {
         $this->prerenderConfigHelper = $prerenderConfigHelper;
-        $this->client = $client;
         $this->jsonSerializer = $jsonSerializer;
         $this->logger = $logger;
+        $this->client = $client;
+        $this->client->addHeader('content-type', 'application/json');
     }
 
+    /**
+     * Call Prerender.io API to recache list of URLs
+     *
+     * @param array $urls
+     * @param int $storeId
+     * @return void
+     */
     public function recacheUrls(array $urls, int $storeId): void
     {
         if (!$this->prerenderConfigHelper->isRecacheEnabled($storeId)) {
@@ -50,16 +65,19 @@ class PrerenderClient implements PrerenderClientInterface
             return;
         }
 
-        if (count($urls) > self::MAX_URLS) {
-            $batches = array_chunk($urls, self::MAX_URLS);
-            foreach ($batches as $batch) {
-                $this->sendRequest($batch, $token);
-            }
-        } else {
-            $this->sendRequest($urls, $token);
+        $batches = array_chunk($urls, self::MAX_URLS);
+        foreach ($batches as $batch) {
+            $this->sendRequest($batch, $token);
         }
     }
 
+    /**
+     * Sends a JSON POST request to Prerender.io
+     *
+     * @param array $urls
+     * @param string $token
+     * @return void
+     */
     private function sendRequest(array $urls, string $token): void
     {
         $payload = $this->jsonSerializer->serialize(
@@ -68,7 +86,6 @@ class PrerenderClient implements PrerenderClientInterface
                 'urls' => $urls
             ]
         );
-        $this->client->addHeader('content-type', 'application/json');
         try {
             $this->client->post(self::PRERENDER_RECACHE_URL, $payload);
         } catch (\Exception $e) {
