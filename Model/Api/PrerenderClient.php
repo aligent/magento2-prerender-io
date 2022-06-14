@@ -27,6 +27,13 @@ class PrerenderClient implements PrerenderClientInterface
     /** @var LoggerInterface  */
     private LoggerInterface $logger;
 
+    /**
+     *
+     * @param Config $prerenderConfigHelper
+     * @param ClientInterface $client
+     * @param SerializerInterface $jsonSerializer
+     * @param LoggerInterface $logger
+     */
     public function __construct(
         Config $prerenderConfigHelper,
         ClientInterface $client,
@@ -40,6 +47,13 @@ class PrerenderClient implements PrerenderClientInterface
         $this->client->addHeader('content-type', 'application/json');
     }
 
+    /**
+     * Call Prerender.io API to recache list of URLs
+     *
+     * @param array $urls
+     * @param int $storeId
+     * @return void
+     */
     public function recacheUrls(array $urls, int $storeId): void
     {
         if (!$this->prerenderConfigHelper->isRecacheEnabled($storeId)) {
@@ -57,6 +71,13 @@ class PrerenderClient implements PrerenderClientInterface
         }
     }
 
+    /**
+     * Sends a JSON POST request to Prerender.io
+     *
+     * @param array $urls
+     * @param string $token
+     * @return void
+     */
     private function sendRequest(array $urls, string $token): void
     {
         $payload = $this->jsonSerializer->serialize(
