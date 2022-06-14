@@ -1,6 +1,9 @@
 name: Run PHP Static Analysis
 
-on: pull_request
+on: 
+  pull_request:
+    branches-ignore:
+      - '**'
   
 jobs:
   code-standards:
