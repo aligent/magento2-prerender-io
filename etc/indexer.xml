@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!--
+  ~ Copyright (c) Aligent Consulting. All rights reserved.
+  -->
+
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
+    <indexer id="prerender_io_product" view_id="prerender_io_product" class="Aligent\PrerenderIo\Model\Indexer\Product\ProductIndexer">
+        <title translate="true">Prerender.io Product Recaching</title>
+        <description translate="true">Recaches product urls when products are updated</description>
+    </indexer>
+</config>
