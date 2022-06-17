@@ -73,7 +73,8 @@ class GetUrlsForProducts
                 continue;
             }
             try {
-                $urls[] = $store->getUrl($urlPath);
+                // remove trailing slashes from urls
+                $urls[] = rtrim($store->getUrl($urlPath), '/');
             } catch (NoSuchEntityException $e) {
                 continue;
             }
