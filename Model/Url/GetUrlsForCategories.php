@@ -4,19 +4,19 @@
  */
 
 declare(strict_types=1);
-namespace Aligent\PrerenderIo\Model\Product;
+namespace Aligent\PrerenderIo\Model\Url;
 
-use Magento\Catalog\Model\Product;
-use Magento\Catalog\Model\ResourceModel\Product\CollectionFactory;
+use Magento\Catalog\Model\Category;
+use Magento\Catalog\Model\ResourceModel\Category\CollectionFactory;
 use Magento\Framework\Exception\NoSuchEntityException;
 use Magento\Store\Model\App\Emulation;
 use Magento\Store\Model\Store;
 use Magento\Store\Model\StoreManagerInterface;
 
-class GetUrlsForProducts
+class GetUrlsForCategories
 {
     /** @var CollectionFactory  */
-    private CollectionFactory $productCollectionFactory;
+    private CollectionFactory $categoryCollectionFactory;
     /** @var StoreManagerInterface */
     private StoreManagerInterface $storeManager;
     /** @var Emulation */
@@ -24,38 +24,36 @@ class GetUrlsForProducts
 
     /**
      *
-     * @param CollectionFactory $productCollectionFactory
+     * @param CollectionFactory $categoryCollectionFactory
      * @param StoreManagerInterface $storeManager
      * @param Emulation $emulation
      */
     public function __construct(
-        CollectionFactory $productCollectionFactory,
+        CollectionFactory $categoryCollectionFactory,
         StoreManagerInterface $storeManager,
         Emulation $emulation
     ) {
-        $this->productCollectionFactory = $productCollectionFactory;
+        $this->categoryCollectionFactory = $categoryCollectionFactory;
         $this->storeManager = $storeManager;
         $this->emulation = $emulation;
     }
 
     /**
-     * Generate product URLs based on URL_REWRITE entries
+     * Generate category URLs based on URL_REWRITE entries
      *
-     * @param array $productIds
+     * @param array $categoryIds
      * @param int $storeId
      * @return array
      */
-    public function execute(array $productIds, int $storeId): array
+    public function execute(array $categoryIds, int $storeId): array
     {
-        $productCollection = $this->productCollectionFactory->create();
-        // do not ignore out of stock products
-        $productCollection->setFlag('has_stock_status_filter', true);
-        // if array of product ids is empty, just load all products
-        if (!empty($productIds)) {
-            $productCollection->addIdFilter($productIds);
+        $categoryCollection = $this->categoryCollectionFactory->create();
+        // if array of category ids is empty, just load all categories
+        if (!empty($categoryIds)) {
+            $categoryCollection->addIdFilter($categoryIds);
         }
-        $productCollection->setStoreId($storeId);
-        $productCollection->addUrlRewrite();
+        $categoryCollection->setStoreId($storeId);
+        $categoryCollection->addUrlRewriteToResult();
 
         try {
             /** @var Store $store */
@@ -66,9 +64,9 @@ class GetUrlsForProducts
 
         $this->emulation->startEnvironmentEmulation($storeId);
         $urls = [];
-        /** @var Product $product */
-        foreach ($productCollection as $product) {
-            $urlPath = $product->getData('request_path');
+        /** @var Category $category */
+        foreach ($categoryCollection as $category) {
+            $urlPath = $category->getData('request_path');
             if (empty($urlPath)) {
                 continue;
             }
