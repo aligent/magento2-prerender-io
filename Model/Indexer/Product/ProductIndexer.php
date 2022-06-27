@@ -22,7 +22,7 @@ use Magento\Store\Model\StoreDimensionProvider;
 
 class ProductIndexer implements IndexerActionInterface, MviewActionInterface, DimensionalIndexerInterface
 {
-    private const INDEXER_ID = 'catalogsearch_fulltext';
+    private const INDEXER_ID = 'prerender_io_product';
     private const DEPLOYMENT_CONFIG_INDEXER_BATCHES = 'indexer/batch_size/';
 
     /** @var DimensionProviderInterface  */
