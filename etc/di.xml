@@ -14,4 +14,18 @@
             </argument>
         </arguments>
     </type>
+    <type name="Aligent\PrerenderIo\Model\Indexer\Category\CategoryIndexer">
+        <arguments>
+            <argument name="dimensionProvider" xsi:type="object" shared="false">
+                Magento\Store\Model\StoreDimensionProvider
+            </argument>
+        </arguments>
+    </type>
+    <type name="Aligent\PrerenderIo\Model\Indexer\Category\ProductIndexer">
+        <arguments>
+            <argument name="dimensionProvider" xsi:type="object" shared="false">
+                Magento\Store\Model\StoreDimensionProvider
+            </argument>
+        </arguments>
+    </type>
 </config>

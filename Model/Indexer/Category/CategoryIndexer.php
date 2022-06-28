@@ -5,11 +5,11 @@
 
 declare(strict_types=1);
 
-namespace Aligent\PrerenderIo\Model\Indexer\Product;
+namespace Aligent\PrerenderIo\Model\Indexer\Category;
 
 use Aligent\PrerenderIo\Api\PrerenderClientInterface;
 use Aligent\PrerenderIo\Helper\Config;
-use Aligent\PrerenderIo\Model\Url\GetUrlsForProducts;
+use Aligent\PrerenderIo\Model\Url\GetUrlsForCategories;
 use Magento\Framework\App\DeploymentConfig;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\LocalizedException;
@@ -20,15 +20,15 @@ use Magento\Framework\Indexer\DimensionProviderInterface;
 use Magento\Framework\Mview\ActionInterface as MviewActionInterface;
 use Magento\Store\Model\StoreDimensionProvider;
 
-class ProductIndexer implements IndexerActionInterface, MviewActionInterface, DimensionalIndexerInterface
+class CategoryIndexer implements IndexerActionInterface, MviewActionInterface, DimensionalIndexerInterface
 {
-    private const INDEXER_ID = 'prerender_io_product';
+    private const INDEXER_ID = 'prerender_io_category';
     private const DEPLOYMENT_CONFIG_INDEXER_BATCHES = 'indexer/batch_size/';
 
     /** @var DimensionProviderInterface  */
     private DimensionProviderInterface $dimensionProvider;
-    /** @var GetUrlsForProducts  */
-    private GetUrlsForProducts $getUrlsForProducts;
+    /** @var GetUrlsForCategories  */
+    private GetUrlsForCategories $getUrlsForCategories;
     /** @var PrerenderClientInterface  */
     private PrerenderClientInterface $prerenderClient;
     /** @var DeploymentConfig  */
@@ -41,7 +41,7 @@ class ProductIndexer implements IndexerActionInterface, MviewActionInterface, Di
     /**
      *
      * @param DimensionProviderInterface $dimensionProvider
-     * @param GetUrlsForProducts $getUrlsForProducts
+     * @param GetUrlsForCategories $getUrlsForCategories
      * @param PrerenderClientInterface $prerenderClient
      * @param DeploymentConfig $deploymentConfig
      * @param Config $prerenderConfigHelper
@@ -49,14 +49,14 @@ class ProductIndexer implements IndexerActionInterface, MviewActionInterface, Di
      */
     public function __construct(
         DimensionProviderInterface $dimensionProvider,
-        GetUrlsForProducts $getUrlsForProducts,
+        GetUrlsForCategories $getUrlsForCategories,
         PrerenderClientInterface $prerenderClient,
         DeploymentConfig $deploymentConfig,
         Config $prerenderConfigHelper,
         ?int $batchSize = 1000
     ) {
         $this->dimensionProvider = $dimensionProvider;
-        $this->getUrlsForProducts = $getUrlsForProducts;
+        $this->getUrlsForCategories = $getUrlsForCategories;
         $this->prerenderClient = $prerenderClient;
         $this->deploymentConfig = $deploymentConfig;
         $this->batchSize = $batchSize;
@@ -139,7 +139,7 @@ class ProductIndexer implements IndexerActionInterface, MviewActionInterface, Di
 
         $entityIds = iterator_to_array($entityIds);
         // get urls for the products
-        $urls = $this->getUrlsForProducts->execute($entityIds, $storeId);
+        $urls = $this->getUrlsForCategories->execute($entityIds, $storeId);
 
         $this->batchSize = $this->deploymentConfig->get(
             self::DEPLOYMENT_CONFIG_INDEXER_BATCHES . self::INDEXER_ID . '/partial_reindex'
