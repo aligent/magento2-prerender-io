@@ -100,7 +100,7 @@ class PrerenderClient implements PrerenderClientInterface
             $this->client->post($preRenderUrl, $payload);
         } catch (\Exception $e) {
             $this->logger->error(
-                __('Error sending payload %1 to Prerender service', $payload),
+                __('Error sending payload %1 to Prerender service. Store %2', $payload, $storeId),
                 ['exception' => $e]
             );
         }
