@@ -1,6 +1,6 @@
 {
     "name": "aligent/magento2-prerender-io",
-    "description": "Prerender.io integration for Magento 2, providing recaching for product URLs",
+    "description": "Prerender service integration for Magento 2, providing recaching for product URLs",
     "require": {
         "php": ">=7.4",
         "magento/framework": "*"

@@ -8,13 +8,16 @@
     <system>
         <section id="system">
             <group id="prerender_io" translate="label" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="100">
-                <label>Prerender.io</label>
+                <label>Prerender service</label>
                 <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Product recaching enabled?</label>
-                    <comment>Send recache requests to Prerender.io on product changes</comment>
+                    <comment>Send recache requests to Prerender service on product changes</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
-                <field id="token" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
+                <field id="url" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="0">
+                    <label>Price By SKU</label>
+                </field>
+                <field id="token" translate="label" type="text" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
                     <label>Token</label>
                     <depends>
                         <field id="enabled">1</field>

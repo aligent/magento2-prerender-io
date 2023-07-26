@@ -5,15 +5,15 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="urn:magento:framework:Indexer/etc/indexer.xsd">
     <indexer id="prerender_io_product" view_id="prerender_io_product" class="Aligent\PrerenderIo\Model\Indexer\Product\ProductIndexer">
-        <title translate="true">Prerender.io Product Recaching</title>
+        <title translate="true">Prerender service Product Recaching</title>
         <description translate="true">Recaches product urls when products are updated</description>
     </indexer>
     <indexer id="prerender_io_category" view_id="prerender_io_category" class="Aligent\PrerenderIo\Model\Indexer\Category\CategoryIndexer">
-        <title translate="true">Prerender.io Category Recaching</title>
+        <title translate="true">Prerender service Category Recaching</title>
         <description translate="true">Recaches category urls when categories are updated</description>
     </indexer>
     <indexer id="prerender_io_category_product" view_id="prerender_io_category_product" class="Aligent\PrerenderIo\Model\Indexer\Category\ProductIndexer">
-        <title translate="true">Prerender.io Category Product Recaching</title>
+        <title translate="true">Prerender service Category Product Recaching</title>
         <description translate="true">Recaches category urls when products are updated</description>
     </indexer>
 </config>
