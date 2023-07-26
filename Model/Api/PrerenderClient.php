@@ -83,9 +83,9 @@ class PrerenderClient implements PrerenderClientInterface
     {
         $prerenderServiceUrl = $this->prerenderConfigHelper->getPrerenderServiceUrl($storeId);
 
-        if (empty($preRenderUrl)) {
+        if (empty($prerenderServiceUrl)) {
             $this->logger->error(
-                'ERROR: prerender url not found.'
+                __('ERROR: prerender url not found. Store ID: %1', $storeId)
             );
             return;
         }
@@ -100,7 +100,7 @@ class PrerenderClient implements PrerenderClientInterface
             $this->client->post($prerenderServiceUrl, $payload);
         } catch (\Exception $e) {
             $this->logger->error(
-                __('Error sending payload %1 to Prerender service. Store %2', $payload, $storeId),
+                __('Error sending payload %1 to Prerender service. Store ID: %2', $payload, $storeId),
                 ['exception' => $e]
             );
         }
