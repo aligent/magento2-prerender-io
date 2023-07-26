@@ -14,7 +14,7 @@ class Config
 {
     private const XML_PATH_RECACHE_ENABLED = 'system/prerender_io/enabled';
     private const XML_PATH_PRERENDER_TOKEN = 'system/prerender_io/token';
-    private const XML_PATH_RECACHE_URL = 'system/prerender_io/url';
+    private const XML_PATH_RECACHE_SERVICE_URL = 'system/prerender_io/service_url';
 
     /** @var ScopeConfigInterface  */
     private ScopeConfigInterface $scopeConfig;
@@ -59,15 +59,15 @@ class Config
     }
 
     /**
-     * Get pre-render url
+     * Get prerender service url
      *
      * @param int|null $storeId
      * @return string|null
      */
-    public function getPreRenderUrl(?int $storeId = null): ?string
+    public function getPrerenderServiceUrl(?int $storeId = null): ?string
     {
         return $this->scopeConfig->getValue(
-            self::XML_PATH_RECACHE_URL,
+            self::XML_PATH_RECACHE_SERVICE_URL,
             ScopeInterface::SCOPE_STORE,
             $storeId
         );

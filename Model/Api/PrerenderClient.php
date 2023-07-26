@@ -81,7 +81,7 @@ class PrerenderClient implements PrerenderClientInterface
      */
     private function sendRequest(array $urls, string $token, ?int $storeId = null): void
     {
-        $preRenderUrl = $this->prerenderConfigHelper->getPreRenderUrl($storeId);
+        $preRenderUrl = $this->prerenderConfigHelper->getPrerenderServiceUrl($storeId);
 
         if (empty($preRenderUrl)) {
             $this->logger->error(
