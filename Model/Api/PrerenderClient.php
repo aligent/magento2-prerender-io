@@ -81,7 +81,7 @@ class PrerenderClient implements PrerenderClientInterface
      */
     private function sendRequest(array $urls, string $token, ?int $storeId = null): void
     {
-        $preRenderUrl = $this->prerenderConfigHelper->getPrerenderServiceUrl($storeId);
+        $prerenderServiceUrl = $this->prerenderConfigHelper->getPrerenderServiceUrl($storeId);
 
         if (empty($preRenderUrl)) {
             $this->logger->error(
@@ -97,7 +97,7 @@ class PrerenderClient implements PrerenderClientInterface
             ]
         );
         try {
-            $this->client->post($preRenderUrl, $payload);
+            $this->client->post($prerenderServiceUrl, $payload);
         } catch (\Exception $e) {
             $this->logger->error(
                 __('Error sending payload %1 to Prerender service. Store %2', $payload, $storeId),
