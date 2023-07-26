@@ -5,7 +5,7 @@
         <system>
             <prerender_io>
                 <enabled>0</enabled>
-                <url><![CDATA[https://api.prerender.io/recache]]></url>
+                <service_url><![CDATA[https://api.prerender.io/recache]]></service_url>
             </prerender_io>
         </system>
     </default>
