@@ -55,4 +55,19 @@ class Config
             $storeId
         );
     }
+
+    /**
+     * Return if product canonical url configuration is enabled or not
+     *
+     * @param int|null $storeId
+     * @return string|null
+     */
+    public function isUseProductCanonicalUrlEnabled(?int $storeId = null): bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::XML_PATH_PRERENDER_USE_PRODUCT_CANONICAL_URL,
+            ScopeInterface::SCOPE_STORE,
+            $storeId
+        );
+    }
 }
