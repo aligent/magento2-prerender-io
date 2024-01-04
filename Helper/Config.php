@@ -4,6 +4,7 @@
  */
 
 declare(strict_types=1);
+
 namespace Aligent\PrerenderIo\Helper;
 
 use Magento\Framework\App\Config\ScopeConfigInterface;
@@ -13,6 +14,7 @@ class Config
 {
     private const XML_PATH_RECACHE_ENABLED = 'system/prerender_io/enabled';
     private const XML_PATH_PRERENDER_TOKEN = 'system/prerender_io/token';
+    private const XML_PATH_PRERENDER_USE_PRODUCT_CANONICAL_URL = 'system/prerender_io/use_product_canonical_url';
 
     /** @var ScopeConfigInterface  */
     private ScopeConfigInterface $scopeConfig;
@@ -36,7 +38,7 @@ class Config
     {
         return $this->scopeConfig->isSetFlag(
             self::XML_PATH_RECACHE_ENABLED,
-            ScopeInterface::SCOPE_STORE,
+            ScopeInterface::SCOPE_STORES,
             $storeId
         );
     }
@@ -51,7 +53,7 @@ class Config
     {
         return $this->scopeConfig->getValue(
             self::XML_PATH_PRERENDER_TOKEN,
-            ScopeInterface::SCOPE_STORE,
+            ScopeInterface::SCOPE_STORES,
             $storeId
         );
     }
@@ -66,7 +68,7 @@ class Config
     {
         return $this->scopeConfig->isSetFlag(
             self::XML_PATH_PRERENDER_USE_PRODUCT_CANONICAL_URL,
-            ScopeInterface::SCOPE_STORE,
+            ScopeInterface::SCOPE_STORES,
             $storeId
         );
     }

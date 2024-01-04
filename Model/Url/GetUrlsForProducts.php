@@ -67,7 +67,7 @@ class GetUrlsForProducts
             }
 
             // Ignore the product URL with category path.
-            if ($urlRewrite->getMetadata() && $useProductCanonical) {
+            if ($useProductCanonical && $urlRewrite->getMetadata()) {
                 continue;
             }
             try {
