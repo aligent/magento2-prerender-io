@@ -20,6 +20,11 @@
                         <field id="enabled">1</field>
                     </depends>
                 </field>
+                <field id="use_product_canonical_url" translate="label comment" type="select" sortOrder="40" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Use Canonical URL For Products</label>
+                    <comment>Ignore the non-canonical URLs which includes category paths for products.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
             </group>
         </section>
     </system>
