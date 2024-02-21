@@ -9,6 +9,7 @@ namespace Aligent\PrerenderIo\Model\Indexer\Category;
 
 use Aligent\PrerenderIo\Api\PrerenderClientInterface;
 use Aligent\PrerenderIo\Helper\Config;
+use Aligent\PrerenderIo\Helper\ProductIndexer as ProductIndexerHelper;
 use Aligent\PrerenderIo\Model\Indexer\DataProvider\ProductCategories;
 use Aligent\PrerenderIo\Model\Url\GetUrlsForCategories;
 use Magento\Framework\App\DeploymentConfig;
@@ -38,6 +39,10 @@ class ProductIndexer implements IndexerActionInterface, MviewActionInterface, Di
     private DeploymentConfig $eploymentConfig;
     /** @var Config  */
     private Config $prerenderConfigHelper;
+    /**
+     * @var ProductIndexerHelper
+     */
+    private ProductIndexerHelper $productIndexerHelper;
     /** @var int|null  */
     private ?int $batchSize;
 
@@ -58,6 +63,7 @@ class ProductIndexer implements IndexerActionInterface, MviewActionInterface, Di
         PrerenderClientInterface $prerenderClient,
         DeploymentConfig $deploymentConfig,
         Config $prerenderConfigHelper,
+        ProductIndexerHelper $productIndexerHelper,
         ?int $batchSize = 1000
     ) {
         $this->dimensionProvider = $dimensionProvider;
@@ -67,6 +73,7 @@ class ProductIndexer implements IndexerActionInterface, MviewActionInterface, Di
         $this->deploymentConfig = $deploymentConfig;
         $this->batchSize = $batchSize;
         $this->prerenderConfigHelper = $prerenderConfigHelper;
+        $this->productIndexerHelper = $this->productIndexerHelper;
     }
 
     /**
@@ -144,6 +151,13 @@ class ProductIndexer implements IndexerActionInterface, MviewActionInterface, Di
         }
 
         $entityIds = iterator_to_array($entityIds);
+        // Include configurable product id(s) if the edited product is simple
+        foreach ($entityIds as $entityId) {
+            $parentEntityIds = $this->productIndexerHelper->getParentEntityId($entityId);
+            if (!empty($parentEntityIds)) {
+                $entityIds = array_merge($entityIds, $parentEntityIds);
+            }
+        }
         // get list of category ids for the products
         $categoryIds = $this->productCategoriesDataProvider->getCategoryIdsForProducts($entityIds, $storeId);
 
