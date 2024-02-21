@@ -9,9 +9,9 @@ namespace Aligent\PrerenderIo\Model\Indexer\Category;
 
 use Aligent\PrerenderIo\Api\PrerenderClientInterface;
 use Aligent\PrerenderIo\Helper\Config;
-use Aligent\PrerenderIo\Helper\ProductIndexer as ProductIndexerHelper;
 use Aligent\PrerenderIo\Model\Indexer\DataProvider\ProductCategories;
 use Aligent\PrerenderIo\Model\Url\GetUrlsForCategories;
+use Magento\ConfigurableProduct\Model\Product\Type\Configurable;
 use Magento\Framework\App\DeploymentConfig;
 use Magento\Framework\Exception\FileSystemException;
 use Magento\Framework\Exception\LocalizedException;
@@ -39,10 +39,8 @@ class ProductIndexer implements IndexerActionInterface, MviewActionInterface, Di
     private DeploymentConfig $eploymentConfig;
     /** @var Config  */
     private Config $prerenderConfigHelper;
-    /**
-     * @var ProductIndexerHelper
-     */
-    private ProductIndexerHelper $productIndexerHelper;
+    /** @var Configurable */
+    private Configurable $configurable;
     /** @var int|null  */
     private ?int $batchSize;
 
@@ -63,7 +61,7 @@ class ProductIndexer implements IndexerActionInterface, MviewActionInterface, Di
         PrerenderClientInterface $prerenderClient,
         DeploymentConfig $deploymentConfig,
         Config $prerenderConfigHelper,
-        ProductIndexerHelper $productIndexerHelper,
+        Configurable $configurable,
         ?int $batchSize = 1000
     ) {
         $this->dimensionProvider = $dimensionProvider;
@@ -73,7 +71,7 @@ class ProductIndexer implements IndexerActionInterface, MviewActionInterface, Di
         $this->deploymentConfig = $deploymentConfig;
         $this->batchSize = $batchSize;
         $this->prerenderConfigHelper = $prerenderConfigHelper;
-        $this->productIndexerHelper = $this->productIndexerHelper;
+        $this->configurable = $configurable;
     }
 
     /**
@@ -151,13 +149,11 @@ class ProductIndexer implements IndexerActionInterface, MviewActionInterface, Di
         }
 
         $entityIds = iterator_to_array($entityIds);
+
         // Include configurable product id(s) if the edited product is simple
-        foreach ($entityIds as $entityId) {
-            $parentEntityIds = $this->productIndexerHelper->getParentEntityId($entityId);
-            if (!empty($parentEntityIds)) {
-                $entityIds = array_merge($entityIds, $parentEntityIds);
-            }
-        }
+        $parentIds = $this->configurable->getParentIdsByChild($entityIds);
+        $entityIds = array_unique(array_merge($entityIds, $parentIds));
+
         // get list of category ids for the products
         $categoryIds = $this->productCategoriesDataProvider->getCategoryIdsForProducts($entityIds, $storeId);
 
