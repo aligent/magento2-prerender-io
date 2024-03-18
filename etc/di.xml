@@ -28,16 +28,9 @@
             </argument>
         </arguments>
     </type>
-    <virtualType name="customStagedProductAttributeSubscription" type="Aligent\PrerenderIo\Model\Mview\View\Attribute\Subscription">
+    <type name="Aligent\Prerender\Model\Mview\View\Attribute\CatalogProductLinkSubscription">
         <arguments>
             <argument name="entityInterface" xsi:type="string">Magento\Catalog\Api\Data\ProductInterface</argument>
-        </arguments>
-    </virtualType>
-    <type name="Magento\CatalogStaging\Model\Mview\View\SubscriptionFactory">
-        <arguments>
-            <argument name="subscriptionModels" xsi:type="array">
-                <item name="catalog_product_link" xsi:type="string">customStagedProductAttributeSubscription</item>
-            </argument>
         </arguments>
     </type>
 </config>
