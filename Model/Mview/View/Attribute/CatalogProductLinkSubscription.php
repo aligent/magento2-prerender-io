@@ -17,9 +17,9 @@ use Magento\Framework\Mview\Config;
 use Magento\Framework\Mview\View\Changelog;
 
 /**
- * Class Subscription implements statement building for staged entity attribute subscription
+ * Subscription model class for "catalog_product_link" table
  */
-class Subscription extends \Magento\Framework\Mview\View\Subscription
+class CatalogProductLinkSubscription extends \Magento\Framework\Mview\View\Subscription
 {
     private const CATALOG_PRODUCT_LINK_PRODUCT_ID = 'product_id';
 
