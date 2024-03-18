@@ -28,4 +28,9 @@
             </argument>
         </arguments>
     </type>
+    <type name="Aligent\Prerender\Model\Mview\View\Attribute\CatalogProductLinkSubscription">
+        <arguments>
+            <argument name="entityInterface" xsi:type="string">Magento\Catalog\Api\Data\ProductInterface</argument>
+        </arguments>
+    </type>
 </config>

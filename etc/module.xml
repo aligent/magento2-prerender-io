@@ -5,5 +5,12 @@
 
 <config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
-    <module name="Aligent_PrerenderIo"/>
+    <module name="Aligent_PrerenderIo">
+        <sequence>
+            <module name="Magento_Store"/>
+            <module name="Magento_Catalog"/>
+            <module name="Magento_ConfigurableProduct"/>
+            <module name="Magento_UrlRewrite"/>
+        </sequence>
+    </module>
 </config>
