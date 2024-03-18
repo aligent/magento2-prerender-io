@@ -7,7 +7,10 @@
         xsi:noNamespaceSchemaLocation="urn:magento:framework:Module/etc/module.xsd">
     <module name="Aligent_PrerenderIo">
         <sequence>
-            <module name="Magento_CatalogStaging"/>
+            <module name="Magento_Store"/>
+            <module name="Magento_Catalog"/>
+            <module name="Magento_ConfigurableProduct"/>
+            <module name="Magento_UrlRewrite"/>
         </sequence>
     </module>
 </config>
