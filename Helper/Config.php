@@ -32,7 +32,7 @@ class Config
     }
 
     /**
-     * Return if recaching functionality is enabled or not
+     * Return if recaching functionality is enabled globally
      *
      * @param int|null $storeId
      * @return bool

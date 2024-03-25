@@ -10,8 +10,8 @@
             <group id="prerender_io" translate="label" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="100">
                 <label>Prerender.io</label>
                 <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Product recaching enabled?</label>
-                    <comment>Send recache requests to Prerender.io on product changes</comment>
+                    <label>Enable prerender.io recaching</label>
+                    <comment>Send recache requests to Prerender.io</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="token" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
