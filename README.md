@@ -1,6 +1,9 @@
 # magento2-prerender-io
 Provides integration between Magento 2 and [Prerender.io](https://prerender.io), giving the ability for pages to be automatically recached when required.
 
+## ATTENTION ##
+Development on this module has been moved to a more generalised fork (https://github.com/aligent/magento2-prerender), removing the hard dependency on prerender.io, and instead utilising a configurable prerender service URL.
+
 ## Overview
 This module provides new indexers:
 
