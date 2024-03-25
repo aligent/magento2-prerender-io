@@ -5,6 +5,9 @@
         <system>
             <prerender_io>
                 <use_product_canonical_url>0</use_product_canonical_url>
+                <enable_product_indexing>1</enable_product_indexing>
+                <enable_product_category_indexing>1</enable_product_category_indexing>
+                <enable_category_indexing>1</enable_category_indexing>
             </prerender_io>
         </system>
     </default>

@@ -140,7 +140,8 @@ class ProductIndexer implements IndexerActionInterface, MviewActionInterface, Di
         }
         $storeId = (int)$dimensions[StoreDimensionProvider::DIMENSION_NAME]->getValue();
 
-        if (!$this->prerenderConfigHelper->isRecacheEnabled($storeId)) {
+        if (!$this->prerenderConfigHelper->isRecacheEnabled($storeId)
+            || !$this->prerenderConfigHelper->isProductCategoryRecacheEnabled($storeId)) {
             return;
         }
 
