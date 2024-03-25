@@ -128,7 +128,7 @@ class ProductIndexer implements IndexerActionInterface, MviewActionInterface, Di
     /**
      * Execute indexing per dimension (store)
      *
-     * @param arry $dimensions
+     * @param array $dimensions
      * @param \Traversable $entityIds
      * @throws FileSystemException
      * @throws RuntimeException
