@@ -13,6 +13,9 @@ use Magento\Store\Model\ScopeInterface;
 class Config
 {
     private const XML_PATH_RECACHE_ENABLED = 'system/prerender_io/enabled';
+    private const XML_PATH_RECACHE_PRODUCT_ENABLED = 'system/prerender_io/enable_product_indexing';
+    private const XML_PATH_RECACHE_PRODUCT_CATEGORY_ENABLED = 'system/prerender_io/enable_product_category_indexing';
+    private const XML_PATH_RECACHE_CATEGORY_ENABLED = 'system/prerender_io/enable_category_indexing';
     private const XML_PATH_PRERENDER_TOKEN = 'system/prerender_io/token';
     private const XML_PATH_PRERENDER_USE_PRODUCT_CANONICAL_URL = 'system/prerender_io/use_product_canonical_url';
 
@@ -29,7 +32,7 @@ class Config
     }
 
     /**
-     * Return if recaching functionality is enabled or not
+     * Return if recaching functionality is enabled globally
      *
      * @param int|null $storeId
      * @return bool
@@ -38,6 +41,51 @@ class Config
     {
         return $this->scopeConfig->isSetFlag(
             self::XML_PATH_RECACHE_ENABLED,
+            ScopeInterface::SCOPE_STORES,
+            $storeId
+        );
+    }
+
+    /**
+     * Return if recaching functionality is enabled for product only indexer
+     *
+     * @param int|null $storeId
+     * @return bool
+     */
+    public function isProductRecacheEnabled(?int $storeId = null): bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::XML_PATH_RECACHE_PRODUCT_ENABLED,
+            ScopeInterface::SCOPE_STORES,
+            $storeId
+        );
+    }
+
+    /**
+     * Return if recaching functionality is enabled for product-category mapping indexer
+     *
+     * @param int|null $storeId
+     * @return bool
+     */
+    public function isProductCategoryRecacheEnabled(?int $storeId = null): bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::XML_PATH_RECACHE_PRODUCT_CATEGORY_ENABLED,
+            ScopeInterface::SCOPE_STORES,
+            $storeId
+        );
+    }
+
+    /**
+     * Return if recaching functionality is enabled for category only indexer
+     *
+     * @param int|null $storeId
+     * @return bool
+     */
+    public function isCategoryRecacheEnabled(?int $storeId = null): bool
+    {
+        return $this->scopeConfig->isSetFlag(
+            self::XML_PATH_RECACHE_CATEGORY_ENABLED,
             ScopeInterface::SCOPE_STORES,
             $storeId
         );

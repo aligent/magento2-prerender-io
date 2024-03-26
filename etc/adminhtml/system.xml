@@ -10,8 +10,8 @@
             <group id="prerender_io" translate="label" showInDefault="1" showInWebsite="1" showInStore="1" sortOrder="100">
                 <label>Prerender.io</label>
                 <field id="enabled" translate="label comment" type="select" sortOrder="10" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Product recaching enabled?</label>
-                    <comment>Send recache requests to Prerender.io on product changes</comment>
+                    <label>Enable prerender.io recaching</label>
+                    <comment>Send recache requests to Prerender.io</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="token" translate="label" type="text" sortOrder="20" showInDefault="1" showInWebsite="1" showInStore="1">
@@ -24,6 +24,30 @@
                     <label>Use Canonical URL For Products</label>
                     <comment>Ignore the non-canonical URLs which includes category paths for products.</comment>
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                </field>
+                <field id="enable_product_indexing" translate="label comment" type="select" sortOrder="50" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Recache product URLs</label>
+                    <comment>Product updates will recache PDPs.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="enable_product_category_indexing" translate="label comment" type="select" sortOrder="60" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Recache product's category URLs</label>
+                    <comment>Product updates will recache linked category PLPs.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
+                </field>
+                <field id="enable_category_indexing" translate="label comment" type="select" sortOrder="70" showInDefault="1" showInWebsite="1" showInStore="1">
+                    <label>Recache category URLs</label>
+                    <comment>Category updates will recache PLPs.</comment>
+                    <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
+                    <depends>
+                        <field id="enabled">1</field>
+                    </depends>
                 </field>
             </group>
         </section>
